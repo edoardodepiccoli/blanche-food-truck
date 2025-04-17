@@ -4,9 +4,10 @@ import React from "react";
 
 type Props = {
   stops: Stop[] | null;
+  setEditingStop: (stop: Stop) => void;
 };
 
-export default function CardsList({ stops }: Props) {
+export default function CardsList({ stops, setEditingStop }: Props) {
   if (!stops || stops.length === 0) {
     return <p className="text-gray-500">Nessuna tappa trovata.</p>;
   }
@@ -50,7 +51,12 @@ export default function CardsList({ stops }: Props) {
         </a>
       </td>
       <td className="flex gap-2">
-        <button className="btn btn-sm btn-warning">Modifica</button>
+        <button
+          className="btn btn-sm btn-warning"
+          onClick={() => setEditingStop(stop)}
+        >
+          Modifica
+        </button>
         <button
           className="btn btn-sm btn-error"
           onClick={() => {

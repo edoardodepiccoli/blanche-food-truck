@@ -9,6 +9,7 @@ import CardsList from "./CardsList";
 
 export default function Dashboard() {
   const [stops, setStops] = useState<Stop[] | null>(null);
+  const [editingStop, setEditingStop] = useState<Stop | null>(null);
 
   // Subscribe to changes in the stops collection
   useEffect(() => {
@@ -26,10 +27,13 @@ export default function Dashboard() {
   return (
     <div className="w-full h-full flex">
       <div className="w-1/2 flex flex-col justify-center items-center">
-        <StopForm></StopForm>
+        <StopForm
+          editingStop={editingStop}
+          setEditingStop={setEditingStop}
+        ></StopForm>
       </div>
       <div className="w-1/2 flex flex-col justify-center items-center">
-        <CardsList stops={stops}></CardsList>
+        <CardsList stops={stops} setEditingStop={setEditingStop}></CardsList>
       </div>
     </div>
   );

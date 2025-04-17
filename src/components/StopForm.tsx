@@ -1,15 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { Stop } from "@/types/Stop";
-import { createStop } from "@/lib/firestore";
+import { createStop, updateStop } from "@/lib/firestore";
 import { format } from "date-fns";
 
-export default function StopForm() {
-  const [formData, setFormData] = useState<Stop>({
-    name: "",
-    date: format(new Date(), "yyyy-MM-dd"),
-    locationUrl: "",
-    groupUrl: "",
-  });
+type Props = {
+  editingStop: Stop | null;
+  setEditingStop: (stop: Stop | null) => void;
+};
+
+export default function StopForm({ editingStop, setEditingStop }: Props) {
+  const [formData, setFormData] = useState<Stop>(
+    editingStop || {
+      name: "",
+      date: format(new Date(), "yyyy-MM-dd"),
+      locationUrl: "",
+      groupUrl: "",
+    }
+  );
+
+  // Change stop that is being edited when clicking on another stop's edit button
+  useEffect(() => {
+    if (editingStop) {
+      setFormData(editingStop);
+    }
+  }, [editingStop]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -19,19 +33,33 @@ export default function StopForm() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement form validation
-    console.log("Submitted FormData:", formData);
-    // TODO: Implement error handling
-    createStop(formData).then(() => console.log("Created Stop!"));
-    // TODO: Clean up this duplicated code
+    // TODO: Implement form validation and error handling
+
+    // NOTE: If the editing stop is somewhat present but not from the database,
+    // then we are not editing, but creating it. Let's check for the id then.
+    if (editingStop && editingStop.id) {
+      await updateStop(editingStop.id, {
+        name: formData.name,
+        date: formData.date,
+        locationUrl: formData.locationUrl,
+        groupUrl: formData.groupUrl,
+      });
+      console.log("Updated Stop!");
+    } else {
+      await createStop(formData);
+      console.log("Created Stop!");
+    }
+
     setFormData({
       name: "",
       date: format(new Date(), "yyyy-MM-dd"),
       locationUrl: "",
       groupUrl: "",
     });
+
+    setEditingStop(null);
   };
 
   return (
@@ -86,9 +114,25 @@ export default function StopForm() {
       </div>
 
       <div>
-        <button type="submit" className="w-full btn btn-primary">
-          Crea Tappa
+        <button type="submit" className="w-full btn btn-primary mb-2">
+          {editingStop && editingStop.id ? "Modifica Tappa" : "Crea Tappa"}
         </button>
+        {editingStop && editingStop.id && (
+          <button
+            className="w-full btn btn-outline"
+            onClick={() => {
+              setEditingStop(null);
+              setFormData({
+                name: "",
+                date: format(new Date(), "yyyy-MM-dd"),
+                locationUrl: "",
+                groupUrl: "",
+              });
+            }}
+          >
+            Annulla Modifica
+          </button>
+        )}
       </div>
     </form>
   );
