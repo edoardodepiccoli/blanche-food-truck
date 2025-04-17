@@ -31,7 +31,7 @@ export default function StopForm() {
       onSubmit={handleSubmit}
       className="w-md mx-auto flex flex-col justify-center gap-2"
     >
-      <h1 className="font-bold text-3xl">Nuova Tappa</h1>
+      <h1 className="font-bold text-3xl mb-4">Nuova Tappa</h1>
 
       <div>
         <input
