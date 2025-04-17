@@ -1,3 +1,4 @@
+import { deleteStop } from "@/lib/firestore";
 import { Stop } from "@/types/Stop";
 import React from "react";
 
@@ -16,8 +17,13 @@ export default function CardsList({ stops }: Props) {
   };
 
   const sortedStops = [...stops].sort((a, b) => a.date.localeCompare(b.date));
+
+  // Upcoming = day >= today
   const upcomingStops = sortedStops.filter((stop) => !isPast(stop.date));
   const pastStops = sortedStops.filter((stop) => isPast(stop.date));
+
+  // Function to delete a stop, simply call the firestore.ts deleteStop function
+  // No need to create a separate handler, arrow function on buttons is enough
 
   const renderRow = (stop: Stop, isPast: boolean) => (
     <tr key={stop.id} className={isPast ? "opacity-30" : ""}>
@@ -45,13 +51,20 @@ export default function CardsList({ stops }: Props) {
       </td>
       <td className="flex gap-2">
         <button className="btn btn-sm btn-warning">Modifica</button>
-        <button className="btn btn-sm btn-error">Elimina</button>
+        <button
+          className="btn btn-sm btn-error"
+          onClick={() => {
+            stop.id && deleteStop(stop.id);
+          }}
+        >
+          Elimina
+        </button>
       </td>
     </tr>
   );
 
   return (
-    <div className="w-full overflow-x-auto px-8">
+    <div className="w-full overflow-x-auto px-8 py-32">
       <h1 className="font-bold text-3xl mb-4">Tutte le tappe</h1>
       <table className="table table-zebra w-full">
         <thead>

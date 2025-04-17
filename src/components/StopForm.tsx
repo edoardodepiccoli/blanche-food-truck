@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import type { Stop } from "@/types/Stop"; // adjust path as needed
+import type { Stop } from "@/types/Stop";
 import { createStop } from "@/lib/firestore";
+import { format } from "date-fns";
 
 export default function StopForm() {
   const [formData, setFormData] = useState<Stop>({
     name: "",
-    date: "",
+    date: format(new Date(), "yyyy-MM-dd"),
     locationUrl: "",
     groupUrl: "",
   });
@@ -24,6 +25,13 @@ export default function StopForm() {
     console.log("Submitted FormData:", formData);
     // TODO: Implement error handling
     createStop(formData).then(() => console.log("Created Stop!"));
+    // TODO: Clean up this duplicated code
+    setFormData({
+      name: "",
+      date: format(new Date(), "yyyy-MM-dd"),
+      locationUrl: "",
+      groupUrl: "",
+    });
   };
 
   return (

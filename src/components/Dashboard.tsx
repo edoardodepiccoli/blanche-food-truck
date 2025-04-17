@@ -10,8 +10,7 @@ import CardsList from "./CardsList";
 export default function Dashboard() {
   const [stops, setStops] = useState<Stop[] | null>(null);
 
-  // This loads the stops initially
-  // TODO: Think about how you can handle a realtime stop change in the CardsList
+  // Subscribe to changes in the stops collection
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "stops"), (snapshot) => {
       const liveStops: Stop[] = snapshot.docs.map((doc) => ({
