@@ -26,13 +26,13 @@ export default function Dashboard() {
 
   return (
     <div className="w-full h-full flex">
-      <div className="w-1/2 flex flex-col justify-center items-center">
+      <div className="w-1/3 flex flex-col justify-center items-center">
         <StopForm
           editingStop={editingStop}
           setEditingStop={setEditingStop}
         ></StopForm>
       </div>
-      <div className="w-1/2 flex flex-col justify-center items-center">
+      <div className="w-2/3 flex flex-col justify-center items-center">
         <CardsList stops={stops} setEditingStop={setEditingStop}></CardsList>
       </div>
     </div>
