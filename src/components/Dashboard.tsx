@@ -26,8 +26,8 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="w-full h-full flex">
-      <div className="w-1/3 flex flex-col justify-center items-center">
+    <div className="w-full md:h-full flex flex-col md:flex-row">
+      <div className="md:w-1/3 flex flex-col justify-center items-center">
         <Image
           src="/truck-primary.png"
           alt="truck image"
@@ -39,7 +39,7 @@ export default function Dashboard() {
           setEditingStop={setEditingStop}
         ></StopForm>
       </div>
-      <div className="w-2/3 flex flex-col justify-center items-center">
+      <div className="md:w-2/3 flex flex-col justify-center items-center">
         <StopsTable stops={stops} setEditingStop={setEditingStop}></StopsTable>
       </div>
     </div>

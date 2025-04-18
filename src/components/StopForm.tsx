@@ -65,9 +65,9 @@ export default function StopForm({ editingStop, setEditingStop }: Props) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-md mx-auto flex flex-col justify-center gap-2"
+      className="w-full px-4 md:w-md mx-auto flex flex-col justify-center gap-2"
     >
-      <h1 className="font-bold text-3xl mb-4">Nuova Tappa</h1>
+      <h1 className="font-bold text-3xl mb-2 md:mb-4">Nuova Tappa</h1>
 
       <div>
         <input
