@@ -7,7 +7,7 @@ type Props = {
   setEditingStop: (stop: Stop) => void;
 };
 
-export default function CardsList({ stops, setEditingStop }: Props) {
+export default function StopsTable({ stops, setEditingStop }: Props) {
   if (!stops || stops.length === 0) {
     return <p className="text-gray-500">Nessuna tappa trovata.</p>;
   }
@@ -27,7 +27,7 @@ export default function CardsList({ stops, setEditingStop }: Props) {
   // No need to create a separate handler, arrow function on buttons is enough
 
   const renderRow = (stop: Stop, isPast: boolean) => (
-    <tr key={stop.id} className={isPast ? "opacity-30" : ""}>
+    <tr key={stop.id} className={isPast ? "opacity-40" : ""}>
       <td>📅 {stop.date}</td>
       <td>{stop.name}</td>
       <td>
@@ -55,12 +55,14 @@ export default function CardsList({ stops, setEditingStop }: Props) {
           className="btn btn-sm btn-warning"
           onClick={() => setEditingStop(stop)}
         >
-          Modifica
+          {isPast ? "Riproponi" : "Modifica"}
         </button>
         <button
           className="btn btn-sm btn-error"
           onClick={() => {
-            stop.id && deleteStop(stop.id);
+            confirm("Vuoi eliminare la tappa?") &&
+              stop.id &&
+              deleteStop(stop.id);
           }}
         >
           Elimina

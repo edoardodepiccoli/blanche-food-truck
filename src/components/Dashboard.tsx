@@ -5,7 +5,8 @@ import StopForm from "./StopForm";
 import { Stop } from "@/types/Stop";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firestore";
-import CardsList from "./CardsList";
+import StopsTable from "./StopsTable";
+import Image from "next/image";
 
 export default function Dashboard() {
   const [stops, setStops] = useState<Stop[] | null>(null);
@@ -27,13 +28,19 @@ export default function Dashboard() {
   return (
     <div className="w-full h-full flex">
       <div className="w-1/3 flex flex-col justify-center items-center">
+        <Image
+          src="/truck-primary.png"
+          alt="truck image"
+          width={150}
+          height={150}
+        ></Image>
         <StopForm
           editingStop={editingStop}
           setEditingStop={setEditingStop}
         ></StopForm>
       </div>
       <div className="w-2/3 flex flex-col justify-center items-center">
-        <CardsList stops={stops} setEditingStop={setEditingStop}></CardsList>
+        <StopsTable stops={stops} setEditingStop={setEditingStop}></StopsTable>
       </div>
     </div>
   );

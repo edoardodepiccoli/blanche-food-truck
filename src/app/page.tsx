@@ -1,3 +1,9 @@
+import StopsList from "@/components/StopsList";
+
 export default function Home() {
-  return <h1>Public page here</h1>;
+  return (
+    <div className="flex flex-col justify-center items-center">
+      <StopsList></StopsList>
+    </div>
+  );
 }
