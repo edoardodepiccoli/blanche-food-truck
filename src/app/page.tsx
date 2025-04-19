@@ -1,10 +1,9 @@
-import Hero from "@/components/Hero";
-import StopsList from "@/components/StopsList";
+import { StopsList } from "@/components/StopsList";
 
 export default function Home() {
   return (
-    <div className="flex flex-col justify-center items-center">
-      <Hero />
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8 text-center">Food Truck Stops</h1>
       <StopsList />
     </div>
   );

@@ -1,3 +1,5 @@
+"use client";
+
 // StopCard.tsx
 import Image from "next/image";
 import { Stop } from "@/types/Stop";
@@ -6,67 +8,79 @@ import { it } from "date-fns/locale";
 
 type Variant = "primary" | "secondary";
 
-export default function StopCard({
-  stop,
-  variant = "secondary",
-}: {
+interface StopCardProps {
   stop: Stop;
-  variant?: Variant;
-}) {
-  const isPrimary = variant === "primary";
-  const imageSrc = isPrimary ? "/truck-secondary.png" : "/truck-primary.png";
+  onEdit?: () => void;
+  onDelete?: () => void;
+}
 
-  const dateObj = parseISO(stop.date);
-  const formattedDate = format(dateObj, "EEEE dd MMMM", { locale: it });
+export const StopCard = ({ stop, onEdit, onDelete }: StopCardProps) => {
+  const formatDate = (dateString: string) => {
+    try {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) {
+        return dateString; // Return original string if date is invalid
+      }
+      return date.toLocaleDateString('it-IT', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    } catch (error) {
+      return dateString; // Return original string if parsing fails
+    }
+  };
 
   return (
-    <div
-      key={stop.id}
-      className={`
-        card card-side w-full max-w-xl mx-auto my-4 shadow
-        ${
-          isPrimary
-            ? "bg-[#5b4241] text-primary-content"
-            : "bg-base-100 border border-base-300"
-        }
-      `}
-    >
-      <figure className="pl-4">
-        <Image
-          src={imageSrc}
-          alt="truck"
-          width={100}
-          height={100}
-          className="object-contain w-24 h-24"
-        />
-      </figure>
-
-      <div className="card-body">
-        <h2 className="card-title text-xl">{stop.name}</h2>
-        <p>📅 {formattedDate}</p>
-        <div className="card-actions justify-end">
-          <a
-            href={stop.locationUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`btn btn-sm btn-outline w-full ${
-              isPrimary ? "border-white text-white" : "btn-info"
-            }`}
-          >
-            Google Maps
-          </a>
-          <a
-            href={stop.groupUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`btn btn-sm btn-outline w-full ${
-              isPrimary ? "border-white text-white" : "btn-success"
-            }`}
-          >
-            WhatsApp
-          </a>
+    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="p-6">
+        <h3 className="text-xl font-semibold mb-2">{stop.name}</h3>
+        {stop.description && (
+          <p className="text-gray-600 mb-4">{stop.description}</p>
+        )}
+        <div className="space-y-2">
+          <p className="text-sm text-gray-500">
+            <span className="font-medium">Indirizzo:</span> {stop.address}
+          </p>
+          <p className="text-sm text-gray-500">
+            <span className="font-medium">Data:</span> {formatDate(stop.date)}
+          </p>
+          <p className="text-sm text-gray-500">
+            <span className="font-medium">Ora:</span> {stop.time}
+          </p>
+          {stop.coordinates && (
+            <a
+              href={`https://www.google.com/maps?q=${stop.coordinates.lat},${stop.coordinates.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-sm text-indigo-600 hover:text-indigo-900"
+            >
+              Visualizza su Google Maps
+            </a>
+          )}
         </div>
       </div>
+      {(onEdit || onDelete) && (
+        <div className="bg-gray-50 px-6 py-4 flex justify-end space-x-4">
+          {onEdit && (
+            <button
+              onClick={onEdit}
+              className="text-indigo-600 hover:text-indigo-900 font-medium"
+            >
+              Modifica
+            </button>
+          )}
+          {onDelete && (
+            <button
+              onClick={onDelete}
+              className="text-red-600 hover:text-red-900 font-medium"
+            >
+              Elimina
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
-}
+};
