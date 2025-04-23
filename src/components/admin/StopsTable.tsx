@@ -63,7 +63,7 @@ export default function StopsTable({ stops, setEditingStop }: Props) {
             {past ? "Riproponi" : "Modifica"}
           </button>
           <button
-            onClick={(e) => {
+            onClick={() => {
               const confirmed = window.confirm("Vuoi eliminare la tappa?");
               if (confirmed && stop.id) {
                 deleteStop(stop.id);
