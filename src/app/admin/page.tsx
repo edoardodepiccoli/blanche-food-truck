@@ -14,34 +14,28 @@ export default function Admin() {
 
   if (loading) {
     return (
-      <div className="h-screen flex flex-col">
-        <div className="w-full h-12 bg-primary-content px-12 flex justify-between items-center"></div>
-        <p className="w-full h-screen flex justify-center items-center">
+      <div className="min-h-[100dvh] flex flex-col">
+        <header className="h-12 bg-primary-content px-2 flex justify-between items-center" />
+        <main className="flex-1 flex justify-center items-center">
           Loading...
-        </p>
+        </main>
       </div>
     );
   }
 
   return (
-    <div className="h-screen flex flex-col">
-      <div className="w-full h-12 bg-primary-content px-2 flex justify-between items-center">
+    <div className="min-h-[100dvh] flex flex-col">
+      <header className="h-12 bg-primary-content px-2 flex justify-between items-center">
         <Link href="/" className="btn btn-link">
           Pagina principale
         </Link>
         {user && (
-          <Link
-            href=""
-            className="btn btn-link"
-            onClick={() => handleSignOut()}
-          >
+          <button className="btn btn-link" onClick={handleSignOut}>
             Logout
-          </Link>
+          </button>
         )}
-      </div>
-      <div className="flex-1 overflow-auto">
-        {user ? <Dashboard /> : <LoginForm />}
-      </div>
+      </header>
+      <main className="flex-1">{user ? <Dashboard /> : <LoginForm />}</main>
     </div>
   );
 }

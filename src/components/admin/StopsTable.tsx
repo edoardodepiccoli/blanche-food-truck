@@ -54,7 +54,10 @@ export default function StopsTable({ stops, setEditingStop }: Props) {
         </div>
         <div className="mt-4 flex gap-2">
           <button
-            onClick={() => setEditingStop(stop)}
+            onClick={() => {
+              setEditingStop(stop);
+              window.scrollTo({ top: 0 });
+            }}
             className="btn btn-sm btn-warning flex-1"
           >
             {past ? "Riproponi" : "Modifica"}
