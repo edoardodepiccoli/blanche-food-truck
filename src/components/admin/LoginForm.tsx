@@ -26,23 +26,24 @@ export default function LoginForm() {
   return (
     <form
       onSubmit={login}
-      className="flex flex-col gap-2 max-w-sm mx-auto mt-10"
+      className="flex flex-col gap-2 max-w-sm mx-auto mt-10 px-4"
     >
+      <div className="text-3xl text-center font-bold">Accedi</div>
       <input
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
         type="email"
-        className="border p-2 rounded"
+        className="input w-full"
       />
       <input
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         type="password"
         placeholder="Password"
-        className="border p-2 rounded"
+        className="input w-full"
       />
-      <button type="submit" className="bg-black text-white py-2 rounded">
+      <button type="submit" className="btn btn-outline">
         Login
       </button>
       {error && <p className="text-red-500">{error}</p>}
