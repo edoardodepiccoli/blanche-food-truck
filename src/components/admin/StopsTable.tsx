@@ -63,9 +63,11 @@ export default function StopsTable({ stops, setEditingStop }: Props) {
             {past ? "Riproponi" : "Modifica"}
           </button>
           <button
-            onClick={() => {
-              if (confirm("Vuoi eliminare la tappa?") && stop.id)
+            onClick={(e) => {
+              const confirmed = window.confirm("Vuoi eliminare la tappa?");
+              if (confirmed && stop.id) {
                 deleteStop(stop.id);
+              }
             }}
             className="btn btn-sm btn-error flex-1"
           >
