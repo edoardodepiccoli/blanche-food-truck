@@ -1,6 +1,7 @@
 "use client";
 
 import Dashboard from "@/components/admin/Dashboard";
+import Link from "next/link";
 import LoginForm from "@/components/admin/LoginForm";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -25,11 +26,11 @@ export default function Admin() {
   return (
     <div className="h-screen flex flex-col">
       <div className="w-full h-12 bg-primary-content px-12 flex justify-between items-center">
-        <a href="/">⬅️ Pagina principale</a>
+        <Link href="/">⬅️ Pagina principale</Link>
         {user && (
-          <a href="" onClick={() => handleSignOut()}>
+          <Link href="" onClick={() => handleSignOut()}>
             Logout
-          </a>
+          </Link>
         )}
       </div>
       <div className="flex-1 overflow-auto">

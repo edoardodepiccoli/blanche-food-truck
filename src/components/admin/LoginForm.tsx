@@ -12,8 +12,14 @@ export default function LoginForm() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else if (typeof err === "object" && err !== null && "message" in err) {
+        setError(String((err as { message: unknown }).message));
+      } else {
+        setError("An unknown error occurred");
+      }
     }
   };
 
