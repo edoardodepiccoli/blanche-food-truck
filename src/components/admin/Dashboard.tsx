@@ -14,7 +14,7 @@ export default function Dashboard() {
   return (
     <div className="h-full overflow-auto w-full flex flex-col max-w-lg mx-auto pb-16">
       {/* Sticky form at top */}
-      <div className="sticky top-0 z-20 bg-base-100 pt-4 px-4 pb-4 border-b border-b-primary">
+      <div className="sticky top-0 z-20 bg-base-100 pt-4 px-4 pb-8 border-b border-b-primary">
         <StopForm editingStop={editingStop} setEditingStop={setEditingStop} />
       </div>
 
