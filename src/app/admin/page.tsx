@@ -25,10 +25,16 @@ export default function Admin() {
 
   return (
     <div className="h-screen flex flex-col">
-      <div className="w-full h-12 bg-primary-content px-12 flex justify-between items-center">
-        <Link href="/">⬅️ Pagina principale</Link>
+      <div className="w-full h-12 bg-primary-content px-2 flex justify-between items-center">
+        <Link href="/" className="btn btn-link">
+          Pagina principale
+        </Link>
         {user && (
-          <Link href="" onClick={() => handleSignOut()}>
+          <Link
+            href=""
+            className="btn btn-link"
+            onClick={() => handleSignOut()}
+          >
             Logout
           </Link>
         )}
