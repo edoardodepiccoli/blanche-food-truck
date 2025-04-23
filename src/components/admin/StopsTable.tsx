@@ -52,7 +52,7 @@ export default function StopsTable({ stops, setEditingStop }: Props) {
             WhatsApp
           </a>
         </div>
-        <div className="mt-4 flex gap-2">
+        <div className="mt-2 flex gap-2">
           <button
             onClick={() => {
               setEditingStop(stop);
