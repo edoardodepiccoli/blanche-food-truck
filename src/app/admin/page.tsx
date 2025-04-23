@@ -1,31 +1,39 @@
 "use client";
 
-import Dashboard from "@/components/Dashboard";
-import { auth } from "@/lib/firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import Dashboard from "@/components/admin/Dashboard";
+import LoginForm from "@/components/admin/LoginForm";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Admin() {
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  const { user, loading, logout } = useAuth();
 
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        router.replace("/admin/login");
-      } else {
-        setLoading(false);
-      }
-    });
+  const handleSignOut = () => {
+    logout();
+  };
 
-    return () => unsub();
-  });
+  if (loading) {
+    return (
+      <div className="h-screen flex flex-col">
+        <div className="w-full h-12 bg-primary-content px-12 flex justify-between items-center"></div>
+        <p className="w-full h-screen flex justify-center items-center">
+          Loading...
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen flex flex-col">
+      <div className="w-full h-12 bg-primary-content px-12 flex justify-between items-center">
+        <a href="/">⬅️ Pagina principale</a>
+        {user && (
+          <a href="" onClick={() => handleSignOut()}>
+            Logout
+          </a>
+        )}
+      </div>
       <div className="flex-1 overflow-auto">
-        {loading ? <p>Loading...</p> : <Dashboard />}
+        {user ? <Dashboard /> : <LoginForm />}
       </div>
     </div>
   );

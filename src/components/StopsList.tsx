@@ -1,34 +1,17 @@
 "use client";
 
-import { db } from "@/lib/firestore";
-import { Stop } from "@/types/Stop";
-import { onSnapshot, collection } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
 import StopCard from "./StopCard";
+import { useStops } from "@/hooks/useStops";
 
 export default function StopsList() {
-  const [stops, setStops] = useState<Stop[] | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const unsub = onSnapshot(collection(db, "stops"), (snapshot) => {
-      const liveStops = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...(doc.data() as Omit<Stop, "id">),
-      }));
-      setStops(liveStops as Stop[]);
-      setIsLoading(false);
-    });
-
-    return () => unsub();
-  }, []);
+  const stops = useStops();
 
   if (!stops || stops.length === 0) {
-    if (isLoading) {
-      return (
-        <div className="text-center text-gray-500 mt-16">Caricamento...</div>
-      );
-    }
+    return (
+      <div className="text-center text-gray-500 mt-16">
+        Caricamento tappe...
+      </div>
+    );
   }
 
   const todayStr = new Date().toISOString().split("T")[0];

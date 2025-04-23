@@ -12,10 +12,8 @@ export default function Hero() {
         className="object-cover"
         quality={100}
       />
-
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-[rgba(59,31,27,0.6)]" />
-
       {/* Logo: half over banner, half over page */}
       <div
         className="

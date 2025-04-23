@@ -1,6 +1,7 @@
-import { deleteStop } from "@/lib/firestore";
-import { Stop } from "@/types/Stop";
 import React from "react";
+import { Stop } from "@/types/Stop";
+import { deleteStop } from "@/lib/firestore";
+import { formatDateItalian } from "@/lib/utils";
 
 type Props = {
   stops: Stop[] | null;
@@ -30,7 +31,7 @@ export default function StopsTable({ stops, setEditingStop }: Props) {
   // Render a table row for desktop view
   const renderTableRow = (stop: Stop, past: boolean) => (
     <tr key={stop.id} className={past ? "opacity-50" : ""}>
-      <td className="px-4 py-2">📅 {stop.date}</td>
+      <td className="px-4 py-2">📅 {formatDateItalian(stop.date)}</td>
       <td className="px-4 py-2">{stop.name}</td>
       <td className="px-4 py-2">
         <a

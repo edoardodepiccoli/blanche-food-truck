@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import type { Stop } from "@/types/Stop";
 import { createStop, updateStop } from "@/lib/firestore";
+
+import type { Stop } from "@/types/Stop";
 import { format } from "date-fns";
 
 type Props = {

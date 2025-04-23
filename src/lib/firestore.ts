@@ -1,15 +1,16 @@
-import { app } from "@/lib/firebase";
-import { Stop } from "@/types/Stop";
 import {
-  getFirestore,
-  collection,
-  doc,
-  getDocs,
-  getDoc,
   addDoc,
-  updateDoc,
+  collection,
   deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  updateDoc,
 } from "firebase/firestore";
+
+import { Stop } from "@/types/Stop";
+import { app } from "@/lib/firebase";
 
 // Initialize Firestore
 export const db = getFirestore(app);

@@ -1,29 +1,17 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import StopForm from "./StopForm";
-import { Stop } from "@/types/Stop";
-import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "@/lib/firestore";
-import StopsTable from "./StopsTable";
+import React, { useState } from "react";
+
 import Image from "next/image";
+import { Stop } from "@/types/Stop";
+import StopForm from "./StopForm";
+import StopsTable from "./StopsTable";
+import { useStops } from "@/hooks/useStops";
 
 export default function Dashboard() {
-  const [stops, setStops] = useState<Stop[] | null>(null);
   const [editingStop, setEditingStop] = useState<Stop | null>(null);
 
-  // Subscribe to changes in the stops collection
-  useEffect(() => {
-    const unsub = onSnapshot(collection(db, "stops"), (snapshot) => {
-      const liveStops: Stop[] = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Stop[];
-      setStops(liveStops);
-    });
-
-    return () => unsub();
-  }, []);
+  const stops = useStops();
 
   return (
     <div className="w-full md:h-full flex flex-col md:flex-row">

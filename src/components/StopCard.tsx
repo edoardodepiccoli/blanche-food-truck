@@ -1,8 +1,8 @@
 // StopCard.tsx
+
 import Image from "next/image";
 import { Stop } from "@/types/Stop";
-import { format, parseISO } from "date-fns";
-import { it } from "date-fns/locale";
+import { formatDateItalian } from "@/lib/utils";
 
 type Variant = "primary" | "secondary";
 
@@ -15,10 +15,6 @@ export default function StopCard({
 }) {
   const isPrimary = variant === "primary";
   const imageSrc = isPrimary ? "/truck-secondary.png" : "/truck-primary.png";
-
-  const dateObj = parseISO(stop.date);
-  const formattedDate = format(dateObj, "EEEE dd MMMM", { locale: it });
-
   return (
     <div
       key={stop.id}
@@ -43,7 +39,7 @@ export default function StopCard({
 
       <div className="card-body">
         <h2 className="card-title text-xl">{stop.name}</h2>
-        <p>📅 {formattedDate}</p>
+        <p>📅 {formatDateItalian(stop.date)}</p>
         <div className="card-actions justify-end">
           <a
             href={stop.locationUrl}
