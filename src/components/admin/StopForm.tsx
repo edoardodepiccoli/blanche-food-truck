@@ -20,7 +20,16 @@ export default function StopForm({ editingStop, setEditingStop }: Props) {
   );
 
   useEffect(() => {
-    if (editingStop) setFormData(editingStop);
+    if (editingStop) {
+      setFormData(editingStop);
+    } else {
+      setFormData({
+        name: "",
+        date: format(new Date(), "yyyy-MM-dd"),
+        locationUrl: "",
+        groupUrl: "",
+      });
+    }
   }, [editingStop]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
