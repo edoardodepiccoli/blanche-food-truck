@@ -14,7 +14,7 @@ export default function Admin() {
 
   if (loading) {
     return (
-      <div className="min-h-[100dvh] flex flex-col">
+      <div className="flex flex-col max-w-md mx-auto">
         <header className="h-12 bg-primary-content px-2 flex justify-between items-center" />
         <main className="flex-1 flex justify-center items-center">
           Loading...
@@ -24,7 +24,7 @@ export default function Admin() {
   }
 
   return (
-    <div className="min-h-[100dvh] flex flex-col">
+    <div className="flex flex-col max-w-md mx-auto">
       <header className="h-12 bg-primary-content px-2 flex justify-between items-center">
         <Link href="/" className="btn btn-link">
           Pagina principale

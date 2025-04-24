@@ -12,9 +12,9 @@ export default function Dashboard() {
   const stops = useStops();
 
   return (
-    <div className="h-full overflow-auto w-full flex flex-col max-w-lg mx-auto pb-16">
+    <div className="h-full overflow-auto w-full flex flex-col mx-auto pb-16 max-w-lg">
       {/* Sticky form at top */}
-      <div className="sticky top-0 z-20 bg-base-100 pt-4 px-4 pb-8 border-b border-b-primary">
+      <div className="bg-base-100 pt-4 px-4 pb-8 border-b border-b-primary">
         <StopForm editingStop={editingStop} setEditingStop={setEditingStop} />
       </div>
 
