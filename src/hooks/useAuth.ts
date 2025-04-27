@@ -21,10 +21,9 @@ export function useAuth() {
   const logout = async () => {
     try {
       await signOut(auth);
-      router.push("/"); // or "/login" if you have a login route
+      router.push("/admin");
     } catch (err) {
       console.error("Failed to sign out:", err);
-      // Optional: toast or error UI
     }
   };
 
