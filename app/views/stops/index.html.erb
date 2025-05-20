@@ -1,0 +1,6 @@
+<h1>Index</h1>
+<ul>
+  <% @stops.each do |stop| %>
+    <li><%= link_to stop.name, stop %></li>
+  <% end %>
+</ul>

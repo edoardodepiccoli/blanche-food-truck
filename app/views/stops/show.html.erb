@@ -1,0 +1,7 @@
+<h1>Show</h1>
+<p>Name: <%= @stop.name %></p>
+<p>Latitude: <%= @stop.latitude %></p>
+<p>Longitude: <%= @stop.longitude %></p>
+<p>Datetime: <%= @stop.datetime %></p>
+<%= link_to "Edit", edit_stop_path(@stop) %>
+<%= link_to "Delete", stop_path(@stop), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>

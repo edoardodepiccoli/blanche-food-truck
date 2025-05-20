@@ -1,0 +1,19 @@
+<%= form_with model: stop do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude %>
+  </div>
+  <div>
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude %>
+  </div>
+  <div>
+    <%= form.label :datetime %>
+    <%= form.datetime_field :datetime %>
+  </div>
+  <%= form.submit %>
+<% end %>
