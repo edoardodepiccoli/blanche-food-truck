@@ -1,7 +1,11 @@
 <h1>Show</h1>
 <p>Name: <%= @stop.name %></p>
-<p>Latitude: <%= @stop.latitude %></p>
-<p>Longitude: <%= @stop.longitude %></p>
-<p>Datetime: <%= @stop.datetime %></p>
+<!-- datetime in italian format with day of the week -->
+<p>Datetime: <%= @stop.start_datetime.strftime("%A, %d %B %Y - %H:%M") %></p>
+<div data-controller="map" data-map-access-token-value="<%= Rails.application.credentials.mapbox_access_token %>">
+  <input type="hidden" id="latitude" value="<%= @stop.latitude || 45.686688 %>" data-map-target="latitude">
+  <input type="hidden" id="longitude" value="<%= @stop.longitude || 11.889175 %>" data-map-target="longitude">
+  <div data-map-target="container" style="width: 100%; height: 600px;"></div>
+</div>
 <%= link_to "Edit", edit_stop_path(@stop) %>
 <%= link_to "Delete", stop_path(@stop), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>

@@ -13,6 +13,15 @@ class StopsController < ApplicationController
 
   def create
     @stop = Stop.new(stop_params)
+    if @stop.start_datetime.blank? || @stop.end_datetime.blank? || @stop.name.blank? || @stop.latitude.blank? || @stop.longitude.blank? || @stop.start_datetime > @stop.end_datetime
+      flash.now[:alert] = "Please fill in all fields"
+      render :new, status: :unprocessable_entity
+      return
+    end
+    if @stop.start_datetime < Time.now
+      flash[:notice] = "Occhio! Hai creato una tappa passata!"
+    end
+
     if @stop.save
       redirect_to @stop
     else
@@ -42,6 +51,6 @@ class StopsController < ApplicationController
   private
 
   def stop_params
-    params.require(:stop).permit(:name, :latitude, :longitude, :datetime)
+    params.require(:stop).permit(:name, :latitude, :longitude, :start_datetime, :end_datetime)
   end
 end

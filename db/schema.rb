@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_20_194426) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_22_081853) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_20_194426) do
     t.string "name"
     t.string "latitude"
     t.string "longitude"
-    t.datetime "datetime"
+    t.datetime "start_datetime"
+    t.datetime "end_datetime"
   end
 end
