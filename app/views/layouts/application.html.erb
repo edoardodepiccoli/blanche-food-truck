@@ -24,6 +24,20 @@
     <!--mapbox stuff-->
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.css" rel="stylesheet">
+
+    <style>
+      body {
+        background-image: url('<%= asset_path("pattern.jpg") %>');
+        background-size: auto;
+        background-position: center;
+        background-repeat: repeat;
+        background-attachment: fixed;
+        background-color: rgba(255, 255, 255, 0.9);
+        background-blend-mode: overlay;
+
+        min-height: 100vh;
+      }
+    </style>
   </head>
 
   <body>

@@ -15,7 +15,7 @@ export default class extends Controller {
     
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/standard',
+      style: 'mapbox://styles/mapbox/navigation-day-v1',
       center: [firstStop.longitude, firstStop.latitude],
       zoom: 12,
     });
