@@ -1,7 +1,7 @@
 # app/models/stop.rb
 class Stop < ApplicationRecord
   validates :name, presence: true, length: { minimum: 2, maximum: 100 }
-  validates :whatsapp_group_url, presence: true, length: { minimum: 5, maximum: 500 }
+  validates :whatsapp_group_url, presence: true
   validates :start_datetime, presence: true
   validates :end_datetime, presence: true
   validates :address, presence: true, length: { minimum: 5, maximum: 500 }

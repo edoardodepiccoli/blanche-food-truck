@@ -1,26 +1,26 @@
-<%= form_with data: { controller: "geocoding", geocoding_mapbox_access_token_value: ENV.fetch("MAPBOX_ACCESS_TOKEN") }, model: stop do |form| %>
+<%= form_with class: "flex flex-col gap-2", data: { controller: "geocoding", geocoding_mapbox_access_token_value: ENV.fetch("MAPBOX_ACCESS_TOKEN") }, model: stop do |form| %>
   <div>
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: "input input-bordered w-full" %>
   </div>
   <div>
     <%= form.label :whatsapp_group_url %>
-    <%= form.text_field :whatsapp_group_url %>
-  </div>
-  <div>
-    <%= form.label :start_datetime %>
-    <%= form.datetime_field :start_datetime %>
-  </div>
-  <div>
-    <%= form.label :end_datetime %>
-    <%= form.datetime_field :end_datetime %>
+    <%= form.text_field :whatsapp_group_url, class: "input input-bordered w-full" %>
   </div>
   <div>
     <%= form.label :address %>
-    <%= form.text_field :address, data: { geocoding_target: "address" } %>
+    <%= form.text_field :address, class: "input input-bordered w-full", data: { geocoding_target: "address" } %>
   </div>
-  <button type="button" data-action="geocoding#getCoordinates">Get Coordinates</button>
-  <p data-geocoding-target="coordinates">Coordinate non impostate</p>
+  <button class="btn btn-primary" type="button" data-action="geocoding#getCoordinates">Imposta indirizzo</button>
+  <p class="text-sm text-center" data-geocoding-target="coordinates">Coordinate non impostate</p>
+  <div>
+    <%= form.label :start_datetime %>
+    <%= form.datetime_field :start_datetime, class: "input input-bordered w-full" %>
+  </div>
+  <div>
+    <%= form.label :end_datetime %>
+    <%= form.datetime_field :end_datetime, class: "input input-bordered w-full" %>
+  </div>
   <div>
     <%= form.hidden_field :latitude, data: { geocoding_target: "latitude" } %>
   </div>
@@ -28,6 +28,7 @@
     <%= form.hidden_field :longitude, data: { geocoding_target: "longitude" } %>
   </div>
   <div>
-    <%= form.submit %>
+    <%= form.submit "Salva", class: "btn btn-primary w-full mb-2" %>
+    <%= link_to "Annulla", stops_path, class: "btn btn-outline w-full" %>
   </div>
 <% end %>
