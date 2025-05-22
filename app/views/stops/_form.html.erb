@@ -1,24 +1,24 @@
 <%= form_with class: "flex flex-col gap-2", data: { controller: "geocoding", geocoding_mapbox_access_token_value: ENV.fetch("MAPBOX_ACCESS_TOKEN") }, model: stop do |form| %>
   <div>
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "input input-bordered w-full" %>
+    <%= form.label :name, "Nome della tappa" %>
+    <%= form.text_field :name, class: "input input-bordered w-full", placeholder: "Castello Di Godego" %>
   </div>
   <div>
-    <%= form.label :whatsapp_group_url %>
-    <%= form.text_field :whatsapp_group_url, class: "input input-bordered w-full" %>
+    <%= form.label :whatsapp_group_url, "URL del gruppo WhatsApp" %>
+    <%= form.text_field :whatsapp_group_url, class: "input input-bordered w-full", placeholder: "https://chat.whatsapp.com/..." %>
   </div>
   <div>
-    <%= form.label :address %>
-    <%= form.text_field :address, class: "input input-bordered w-full", data: { geocoding_target: "address" } %>
+    <%= form.label :address, "Indirizzo" %>
+    <%= form.text_field :address, class: "input input-bordered w-full", data: { geocoding_target: "address" }, placeholder: "Via Caprera, 35, 31010, Castello Di Godego (TV)" %>
   </div>
   <button class="btn btn-primary" type="button" data-action="geocoding#getCoordinates">Imposta indirizzo</button>
-  <p class="text-sm text-center" data-geocoding-target="coordinates">Coordinate non impostate</p>
+  <p class="text-sm text-center mb-2" data-geocoding-target="coordinates">Coordinate non impostate</p>
   <div>
-    <%= form.label :start_datetime %>
+    <%= form.label :start_datetime, "Data e orario di inizio" %>
     <%= form.datetime_field :start_datetime, class: "input input-bordered w-full" %>
   </div>
   <div>
-    <%= form.label :end_datetime %>
+    <%= form.label :end_datetime, "Data e orario di fine" %>
     <%= form.datetime_field :end_datetime, class: "input input-bordered w-full" %>
   </div>
   <div>
