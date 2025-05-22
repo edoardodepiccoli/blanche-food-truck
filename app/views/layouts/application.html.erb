@@ -60,6 +60,18 @@
         <% end %>
       </div>
     <% end %>
+    <% if true %>
+      <nav class="max-w-screen-md mx-auto p-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <%= image_tag "truck-primary.png", class: "w-20 h-20" %>
+          <h2 class="text-2xl font-bold">Blanche Food Truck</h2>
+        </div>
+        <div class="flex justify-end gap-2">
+          <a href="<%= stops_path %>" class="btn btn-primary btn-outline">🗓️ Visualizza tappe</a>
+          <a href="<%= new_stop_path %>" class="btn btn-primary btn-outline">🚧 Aggiungi tappa</a>
+        </div>
+      </nav>
+    <% end %>
     <main class="max-w-screen-md mx-auto p-4">
       <%= yield %>
     </main>

@@ -11,9 +11,9 @@ class Stop < ApplicationRecord
   validate :end_datetime_after_start_datetime
   validate :start_datetime_in_future
 
-  scope :upcoming, -> { where("DATE(start_datetime) > ?", Date.current) }
-  scope :today, -> { where("DATE(start_datetime) = ?", Date.current) }
-  scope :past, -> { where("DATE(end_datetime) < ?", Date.current) }
+  scope :upcoming, -> { where("DATE(start_datetime) > ?", Date.current).order(start_datetime: :asc) }
+  scope :today, -> { where("DATE(start_datetime) = ?", Date.current).order(start_datetime: :asc) }
+  scope :past, -> { where("DATE(end_datetime) < ?", Date.current).order(end_datetime: :desc) }
 
   def maps_url
     "https://maps.apple.com/?q=#{latitude},#{longitude}&z=15"
