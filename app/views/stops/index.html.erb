@@ -9,7 +9,7 @@
             <p class="text-lg"><span class="font-bold">📌 <%= stop.name %></span> - <span class="text-sm"><%= l(stop.start_datetime, format: "%A %d %B") %></span></p>
           </div>
           <div class="collapse-content">
-            <p>Ci trovi in <a href="<%= stop.google_maps_url %>" class="link link-hover text-blue-500" target="_blank"><%= stop.address %></a>, dalle <%= l(stop.start_datetime, format: "%H:%M") %> alle <%= l(stop.end_datetime, format: "%H:%M") %></p>
+            <p>Indirizzo esatto: <a href="<%= stop.google_maps_url %>" class="link link-hover text-blue-500" target="_blank"><%= stop.address %></a>. Dalle <%= l(stop.start_datetime, format: "%H:%M") %> alle <%= l(stop.end_datetime, format: "%H:%M") %></p>
             <div class="flex justify-center">
               <a href="<%= stop.whatsapp_group_url %>" class="btn text-white bg-[#25D366] mt-4 w-full" target="_blank">💬 Unisciti al gruppo WhatsApp</a>
             </div>
@@ -26,13 +26,12 @@
   <% end %>
 </div>
 
-<% if @today_stops.any? %>
-  <div class="py-4 border-b border-base-300 border-dashed" data-controller="map" 
-       data-map-access-token-value="<%= ENV.fetch("MAPBOX_ACCESS_TOKEN") %>"
-       data-map-stops-value="<%= @today_stops.to_json(only: [:latitude, :longitude, :name, :google_maps_url]) %>">
-    <div id="map" style="width: 100%; height: 400px;"></div>
-  </div>
-<% end %>
+<div class="py-4 border-b border-base-300 border-dashed" data-controller="map" 
+     data-map-access-token-value="<%= ENV.fetch("MAPBOX_ACCESS_TOKEN") %>"
+     data-map-today-stops-value="<%= @today_stops.to_json(only: [:latitude, :longitude, :name, :google_maps_url, :start_datetime]) %>"
+     data-map-upcoming-stops-value="<%= @upcoming_stops.to_json(only: [:latitude, :longitude, :name, :google_maps_url, :start_datetime]) %>">
+  <div id="map" style="width: 100%; height: 400px;"></div>
+</div>
 
 <div class="py-4 border-b border-base-300 border-dashed pb-32">
   <% if @upcoming_stops.any? %>
@@ -45,7 +44,7 @@
             <p class="text-lg"><span class="font-bold">📌 <%= stop.name %></span> - <span class="text-sm"><%= l(stop.start_datetime, format: "%A %d %B") %></span></p>
           </div>
           <div class="collapse-content">
-            <p>Ci trovi in <a href="<%= stop.google_maps_url %>" class="link link-hover text-blue-500" target="_blank"><%= stop.address %></a>, dalle <%= l(stop.start_datetime, format: "%H:%M") %> alle <%= l(stop.end_datetime, format: "%H:%M") %></p>
+            <p>Indirizzo esatto: <a href="<%= stop.google_maps_url %>" class="link link-hover text-blue-500" target="_blank"><%= stop.address %></a>. Dalle <%= l(stop.start_datetime, format: "%H:%M") %> alle <%= l(stop.end_datetime, format: "%H:%M") %></p>
             <div class="flex justify-center">
               <a href="<%= stop.whatsapp_group_url %>" class="btn text-white bg-[#25D366] mt-4 w-full" target="_blank">💬 Unisciti al gruppo WhatsApp</a>
             </div>
