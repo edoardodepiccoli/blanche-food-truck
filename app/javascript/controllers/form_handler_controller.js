@@ -2,10 +2,25 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="form-handler"
 export default class extends Controller {
-  static targets = ["startDatetime", "endDatetime"]
+  static targets = ["startDatetime", "endDatetime", "name", "address"]
 
   connect() {
     this.startDatetimeTarget.addEventListener('input', this.updateEndDatetime.bind(this))
+    
+    // Add input listeners for text fields that need capitalization
+    this.nameTarget.addEventListener('input', this.capitalizeText.bind(this))
+    this.addressTarget.addEventListener('input', this.capitalizeText.bind(this))
+  }
+
+  capitalizeText(event) {
+    const input = event.target
+    const words = input.value.split(' ')
+    const capitalizedWords = words.map(word => {
+      // Don't capitalize if the word is all uppercase (like TV, USA, etc.)
+      if (word === word.toUpperCase()) return word
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    })
+    input.value = capitalizedWords.join(' ')
   }
 
   updateEndDatetime() {

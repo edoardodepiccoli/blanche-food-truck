@@ -5,6 +5,7 @@ class StopsController < ApplicationController
   def index
     @upcoming_stops = Stop.upcoming.order(:start_datetime)
     @today_stops = Stop.today.order(:start_datetime)
+    @past_stops = Stop.past.order(start_datetime: :desc)
   end
 
   def new

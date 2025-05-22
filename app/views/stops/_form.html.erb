@@ -1,7 +1,7 @@
 <%= form_with class: "flex flex-col gap-2", data: { controller: "geocoding form-handler", geocoding_mapbox_access_token_value: ENV.fetch("MAPBOX_ACCESS_TOKEN") }, model: stop do |form| %>
   <div>
     <%= form.label :name, "Nome della tappa" %>
-    <%= form.text_field :name, class: "input input-bordered w-full", placeholder: "Castello Di Godego" %>
+    <%= form.text_field :name, class: "input input-bordered w-full", placeholder: "Castello Di Godego", data: { form_handler_target: "name" } %>
   </div>
   <div>
     <%= form.label :whatsapp_group_url, "URL del gruppo WhatsApp" %>
@@ -9,7 +9,7 @@
   </div>
   <div>
     <%= form.label :address, "Indirizzo" %>
-    <%= form.text_field :address, class: "input input-bordered w-full", data: { geocoding_target: "address" }, placeholder: "Via Caprera, 35, 31010, Castello Di Godego (TV)" %>
+    <%= form.text_field :address, class: "input input-bordered w-full", data: { geocoding_target: "address", form_handler_target: "address" }, placeholder: "Via Caprera, 35, 31010, Castello Di Godego (TV)" %>
   </div>
   <button class="btn btn-primary" type="button" data-action="geocoding#getCoordinates">Imposta indirizzo</button>
   <p class="text-sm text-center mb-2" data-geocoding-target="coordinates">Coordinate non impostate</p>

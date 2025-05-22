@@ -9,7 +9,7 @@ class Stop < ApplicationRecord
   validates :longitude, presence: true, numericality: { in: -180.0..180.0 }
 
   validate :end_datetime_after_start_datetime
-  validate :start_datetime_in_future
+  # validate :start_datetime_in_future
 
   scope :upcoming, -> { where("DATE(start_datetime) > ?", Date.current).order(start_datetime: :asc) }
   scope :today, -> { where("DATE(start_datetime) = ?", Date.current).order(start_datetime: :asc) }
