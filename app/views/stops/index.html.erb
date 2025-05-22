@@ -1,21 +1,38 @@
-<div class="py-4 border-b border-base-300 border-dashed">
+<div>
   <% if @today_stops.any? %>
     <h2 class="text-2xl font-bold mb-2">⭐ Dove ci trovi oggi ⭐</h2>
     <ul>
       <% @today_stops.each do |stop| %>
         <div class="collapse collapse-arrow bg-base-200 mb-2">
-          <input type="checkbox" name="collapse" />
+          <input type="checkbox" name="collapse" checked="checked" />
           <div class="collapse-title">
             <p class="text-lg"><span class="font-bold">📌 <%= stop.name %></span> - <span class="text-sm"><%= l(stop.start_datetime, format: "%A %d %B") %></span></p>
           </div>
           <div class="collapse-content">
             <p>Ci trovi in <a href="<%= stop.google_maps_url %>" class="link link-hover text-blue-500" target="_blank"><%= stop.address %></a>, dalle <%= l(stop.start_datetime, format: "%H:%M") %> alle <%= l(stop.end_datetime, format: "%H:%M") %></p>
+            <div class="flex justify-center">
+              <a href="<%= stop.whatsapp_group_url %>" class="btn text-white bg-[#25D366] mt-4 w-full" target="_blank">💬 Unisciti al gruppo WhatsApp</a>
+            </div>
+            <% if true %>
+              <div class="flex justify-center gap-2">
+                <a href="<%= edit_stop_path(stop) %>" data-turbo-method="get" class="btn btn-primary btn-outline mt-4 flex-1">🔧 Modifica</a>
+                <a href="<%= stop_path(stop) %>" data-turbo-method="delete" class="btn btn-error btn-outline mt-4 flex-1">🗑️ Elimina</a>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>
     </ul>
   <% end %>
 </div>
+
+<% if @today_stops.any? %>
+  <div class="py-4 border-b border-base-300 border-dashed" data-controller="map" 
+       data-map-access-token-value="<%= ENV.fetch("MAPBOX_ACCESS_TOKEN") %>"
+       data-map-stops-value="<%= @today_stops.to_json(only: [:latitude, :longitude, :name, :google_maps_url]) %>">
+    <div id="map" style="width: 100%; height: 400px;"></div>
+  </div>
+<% end %>
 
 <div class="py-4 border-b border-base-300 border-dashed">
   <% if @upcoming_stops.any? %>
@@ -32,6 +49,12 @@
             <div class="flex justify-center">
               <a href="<%= stop.whatsapp_group_url %>" class="btn text-white bg-[#25D366] mt-4 w-full" target="_blank">💬 Unisciti al gruppo WhatsApp</a>
             </div>
+            <% if true %>
+              <div class="flex justify-center gap-2">
+                <a href="<%= edit_stop_path(stop) %>" data-turbo-method="get" class="btn btn-primary btn-outline mt-4 flex-1">🔧 Modifica</a>
+                <a href="<%= stop_path(stop) %>" data-turbo-method="delete" class="btn btn-error btn-outline mt-4 flex-1">🗑️ Elimina</a>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>
