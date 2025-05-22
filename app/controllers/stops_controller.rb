@@ -18,8 +18,9 @@ class StopsController < ApplicationController
     @stop = Stop.new(stop_params)
 
     if @stop.save
-      redirect_to @stop, notice: "Stop was successfully created."
+      redirect_to @stop, notice: "Tappa creata con successo"
     else
+      flash[:alert] = "Errore nella creazione della tappa"
       render :new, status: :unprocessable_entity
     end
   end
@@ -29,15 +30,16 @@ class StopsController < ApplicationController
 
   def update
     if @stop.update(stop_params)
-      redirect_to @stop, notice: "Stop was successfully updated."
+      redirect_to @stop, notice: "Tappa aggiornata con successo"
     else
+      flash[:alert] = "Errore nell'aggiornamento della tappa"
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @stop.destroy
-    redirect_to stops_url, notice: "Stop was successfully deleted."
+    redirect_to stops_url, notice: "Tappa eliminata con successo"
   end
 
   private

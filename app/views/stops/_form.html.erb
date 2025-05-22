@@ -1,20 +1,43 @@
-<%= form_with model: stop, data: { controller: "geocoding", geocoding_mapbox_access_token_value: ENV.fetch("MAPBOX_ACCESS_TOKEN") } do |form| %>
+<%= form_with model: stop, data: { controller: "geocoding", geocoding_mapbox_access_token_value: ENV.fetch("MAPBOX_ACCESS_TOKEN") }, class: "flex flex-col mt-4 gap-4" do |form| %>
   <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name, "Nome" %>
+    <%= form.text_field :name, class: "w-full input input-primary" %>
   </div>
   <div>
-    <%= form.label :address %>
-    <%= form.text_area :address, data: { geocoding_target: "address" } %>
-    <button type="button" data-action="geocoding#getCoordinates">Imposta indirizzo</button>
-    <p data-geocoding-target="coordinates">Cerca un indirizzo per ottenere le coordinate</p>
+    <%= form.label :address, "Indirizzo" %>
+    <%= form.text_field :address, data: { geocoding_target: "address" }, class: "w-full input input-primary" %>
+  </div>
+  <div>
+    <button type="button" class="w-full btn btn-primary" data-action="geocoding#getCoordinates">Imposta indirizzo</button>
+    <p data-geocoding-target="coordinates" class="text-sm text-center mt-2">Cerca un indirizzo per ottenere le coordinate</p>
+  </div>
+  <div>
+    <%= form.label :start_datetime, "Data e ora di partenza" %>
+    <%= form.datetime_field :start_datetime, class: "w-full input input-primary" %>
+  </div>
+  <div>
+    <%= form.label :end_datetime, "Data e ora di arrivo" %>
+    <%= form.datetime_field :end_datetime, class: "w-full input input-primary" %>
   </div>
   <div>
     <%= form.hidden_field :latitude, value: stop.latitude || "", data: { geocoding_target: "latitude" } %>
     <%= form.hidden_field :longitude, value: stop.longitude || "", data: { geocoding_target: "longitude" } %>
   </div>
-  <div>
-    <%= form.submit %>
-    <%= link_to 'Cancel', stops_path %>
+  <div class="w-full flex flex-col gap-2">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to 'Annulla', stops_path, class: "btn btn-outline" %>
   </div>
 <% end %>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const startDatetime = document.getElementById("stop_start_datetime");
+    const endDatetime = document.getElementById("stop_end_datetime");
+    startDatetime.addEventListener("change", function() {
+      const startDate = new Date(startDatetime.value);
+      const endDate = new Date(startDate);
+      endDate.setHours(startDate.getHours() + 3);
+      endDate.setMinutes(startDate.getMinutes() + 30);
+      endDatetime.value = endDate.toISOString().slice(0, 16);
+    });
+  });
+</script>

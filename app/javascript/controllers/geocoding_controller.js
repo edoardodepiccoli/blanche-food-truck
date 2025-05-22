@@ -25,6 +25,6 @@ export default class extends Controller {
     this.latitudeTarget.value = data.features[0].geometry.coordinates[1]
     this.longitudeTarget.value = data.features[0].geometry.coordinates[0]
 
-    this.coordinatesTarget.textContent = `Coordinate: ${this.latitudeTarget.value}, ${this.longitudeTarget.value}`
+    this.coordinatesTarget.textContent = `✅ Coordinate impostate: ${this.latitudeTarget.value}, ${this.longitudeTarget.value}`
   }
 }
