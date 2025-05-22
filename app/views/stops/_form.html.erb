@@ -1,0 +1,20 @@
+<%= form_with model: stop, data: { controller: "geocoding", geocoding_mapbox_access_token_value: ENV.fetch("MAPBOX_ACCESS_TOKEN") } do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :address %>
+    <%= form.text_area :address, data: { geocoding_target: "address" } %>
+    <button type="button" data-action="geocoding#getCoordinates">Imposta indirizzo</button>
+    <p data-geocoding-target="coordinates">Cerca un indirizzo per ottenere le coordinate</p>
+  </div>
+  <div>
+    <%= form.hidden_field :latitude, value: stop.latitude || "", data: { geocoding_target: "latitude" } %>
+    <%= form.hidden_field :longitude, value: stop.longitude || "", data: { geocoding_target: "longitude" } %>
+  </div>
+  <div>
+    <%= form.submit %>
+    <%= link_to 'Cancel', stops_path %>
+  </div>
+<% end %>
