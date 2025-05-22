@@ -4,7 +4,7 @@ class StopsController < ApplicationController
 
   def index
     @upcoming_stops = Stop.upcoming.order(:start_datetime)
-    @active_stops = Stop.active.order(:start_datetime)
+    @today_stops = Stop.today.order(:start_datetime)
   end
 
   def new
@@ -15,7 +15,7 @@ class StopsController < ApplicationController
     @stop = Stop.new(stop_params)
 
     if @stop.save
-      redirect_to @stop, notice: "Tappa creata con successo."
+      redirect_to stops_path, notice: "Tappa creata con successo."
     else
       flash.now[:alert] = "Impossibile creare la tappa."
       render :new, status: :unprocessable_entity
@@ -27,7 +27,7 @@ class StopsController < ApplicationController
 
   def update
     if @stop.update(stop_params)
-      redirect_to @stop, notice: "Tappa aggiornata con successo."
+      redirect_to stops_path, notice: "Tappa aggiornata con successo."
     else
       flash.now[:alert] = "Impossibile aggiornare la tappa."
       render :edit, status: :unprocessable_entity
@@ -36,7 +36,7 @@ class StopsController < ApplicationController
 
   def destroy
     @stop.destroy
-    redirect_to stops_url, notice: "Tappa eliminata con successo."
+    redirect_to stops_path, notice: "Tappa eliminata con successo."
   end
 
   private

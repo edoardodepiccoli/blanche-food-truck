@@ -1,1 +1,16 @@
-<h1>Stops#index</h1>
+<% if @today_stops.any? %>
+  <h2 class="text-2xl font-bold">Oggi siamo a</h2>
+  <ul>
+    <% @today_stops.each do |stop| %>
+      <li><%= stop.name %> - <%= stop.start_datetime %> - <%= stop.end_datetime %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% if @upcoming_stops.any? %>
+  <h2 class="text-2xl font-bold">Tappe future</h2>
+  <ul>
+    <% @upcoming_stops.each do |stop| %>
+      <li><%= stop.name %> - <%= stop.start_datetime %> - <%= stop.end_datetime %></li>
+    <% end %>
+  </ul>
+<% end %> 
