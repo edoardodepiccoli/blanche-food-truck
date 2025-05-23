@@ -57,7 +57,7 @@
      data-map-access-token-value="<%= ENV.fetch("MAPBOX_ACCESS_TOKEN") %>"
      data-map-today-stops-value="<%= @today_stops.to_json(methods: [:google_maps_url], only: [:latitude, :longitude, :name, :start_datetime]) %>"
      data-map-upcoming-stops-value="<%= @upcoming_stops.to_json(methods: [:google_maps_url], only: [:latitude, :longitude, :name, :start_datetime]) %>">
-  <div id="map" style="width: 100%; height: 400px;"></div>
+  <div class="shadow-xl" id="map" style="width: 100%; height: 400px;"></div>
 </div>
 
 <div class="py-4 border-b border-base-300 border-dashed pb-24">
@@ -73,7 +73,7 @@
         <% if index == 0 || (index > 0 && stop.start_datetime.beginning_of_week != @upcoming_stops[index - 1].start_datetime.beginning_of_week) %>
           <h3 class="text-xl font-semibold mb-4 mt-6">📅 Settimana del <%= l(stop.start_datetime.beginning_of_week, format: "%d/%m/%Y") %></h3>
         <% end %>
-        <div class="collapse collapse-arrow bg-base-200 mb-2 <%= 'mb-8' if different_week %>">
+        <div class="shadow-lg collapse collapse-arrow bg-base-200 mb-2 <%= 'mb-8' if different_week %>">
           <input type="checkbox" name="collapse" />
           <div class="collapse-title">
             <p class="text-lg"><span class="font-bold">📌 <%= stop.name %></span> - <span class="text-sm"><%= l(stop.start_datetime, format: "%A %d %B") %></span></p>
@@ -96,9 +96,9 @@
   <% end %> 
 </div>
 
-<div class="py-4">
+<div class="py-4 pb-32">
   <% if @past_stops.any? %>
-    <h2 class="text-2xl font-bold mb-2 relative inline-block">
+    <h2 class="text-2xl font-bold mb-4 relative inline-block">
       <span class="relative z-10">Tappe passate</span>
       <span class="absolute inset-0 bg-yellow-300/50 -rotate-1"></span>
     </h2>

@@ -12,7 +12,7 @@
     <%= form.text_field :address, class: "input input-bordered w-full", data: { geocoding_target: "address", form_handler_target: "address" }, placeholder: "Via Caprera, 35, 31010, Castello Di Godego (TV)" %>
   </div>
   <button class="btn btn-primary" type="button" data-action="geocoding#getCoordinates">Imposta indirizzo</button>
-  <p class="text-sm text-center mb-2" data-geocoding-target="coordinates">Coordinate non impostate</p>
+  <p class="text-sm text-center mb-2" data-geocoding-target="coordinates">‼️ Coordinate non impostate</p>
   <div>
     <%= form.label :start_datetime, "Data e orario di inizio" %>
     <%= form.datetime_field :start_datetime, class: "input input-bordered w-full", data: { form_handler_target: "startDatetime" } %>
