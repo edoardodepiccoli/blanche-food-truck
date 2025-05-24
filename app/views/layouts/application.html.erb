@@ -72,6 +72,7 @@
               <% if current_user %>
                 <a href="<%= stops_path %>" class="btn btn-sm md:btn-md btn-primary btn-outline flex-1">🗓️ Visualizza tappe</a>
                 <a href="<%= new_stop_path %>" class="btn btn-sm md:btn-md btn-primary btn-outline flex-1">🚧 Aggiungi tappa</a>
+                <%= button_to "Esci", destroy_user_session_path, method: :delete, class: "btn btn-sm md:btn-md btn-error btn-outline flex-1" %>
               <% end %>
             </div>
           <% end %>
