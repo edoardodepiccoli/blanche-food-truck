@@ -1,6 +1,7 @@
 # app/controllers/stops_controller.rb
 class StopsController < ApplicationController
   before_action :set_stop, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @upcoming_stops = Stop.upcoming.order(:start_datetime)

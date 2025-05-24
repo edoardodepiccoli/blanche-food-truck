@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :stops, only: [:index, :new, :create, :edit, :update, :destroy]
   root "stops#index"
 

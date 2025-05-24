@@ -1,0 +1,25 @@
+<h2 class="text-2xl font-bold mb-4">Entra come admin</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "flex flex-col gap-2") do |f| %>
+  <div>
+    <%= f.label :email, class: "block mb-1" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered w-full", placeholder: "esempio@email.com" %>
+  </div>
+
+  <div>
+    <%= f.label :password, class: "block mb-1" %>
+    <%= f.password_field :password, autocomplete: "current-password", class: "input input-bordered w-full", placeholder: "••••••••" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="flex items-center gap-2 mt-2">
+      <%= f.check_box :remember_me, class: "checkbox", checked: true %>
+      <%= f.label :remember_me, "Resta connesso", class: "text-sm" %>
+    </div>
+  <% end %>
+
+  <div class="flex flex-col gap-2 mt-4">
+    <%= f.submit "Log in", class: "btn btn-primary w-full" %>
+    <%= render "devise/shared/links" %>
+  </div>
+<% end %>

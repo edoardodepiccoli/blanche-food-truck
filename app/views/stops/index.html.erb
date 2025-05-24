@@ -39,7 +39,7 @@
               <div class="flex justify-center">
                 <a href="<%= stop.whatsapp_group_url %>" class="btn text-white bg-[#25D366] mt-4 w-full" target="_blank">💬 Unisciti al gruppo WhatsApp</a>
               </div>
-              <% if true %>
+              <% if user_signed_in? %>
                 <div class="flex justify-center gap-2 mt-2">
                   <a href="<%= edit_stop_path(stop) %>" data-turbo-method="get" class="btn btn-primary btn-outline flex-1">🔧 Modifica</a>
                   <a href="<%= stop_path(stop) %>" data-turbo-method="delete" class="btn btn-error btn-outline flex-1">🗑️ Elimina</a>
@@ -83,7 +83,7 @@
             <div class="flex justify-center">
               <a href="<%= stop.whatsapp_group_url %>" class="btn text-white bg-[#25D366] mt-4 w-full" target="_blank">💬 Unisciti al gruppo WhatsApp</a>
             </div>
-            <% if true %>
+            <% if user_signed_in? %>
               <div class="flex justify-center gap-2 mt-2">
                 <a href="<%= edit_stop_path(stop) %>" data-turbo-method="get" class="btn btn-primary btn-outline flex-1">🔧 Modifica</a>
                 <a href="<%= stop_path(stop) %>" data-turbo-method="delete" class="btn btn-error btn-outline flex-1">🗑️ Elimina</a>
@@ -114,7 +114,7 @@
             <div class="flex justify-center">
               <a href="<%= stop.whatsapp_group_url %>" class="btn text-white bg-[#25D366] mt-4 w-full" target="_blank">💬 Unisciti al gruppo WhatsApp</a>
             </div>
-            <% if true %>
+            <% if user_signed_in? %>
               <div class="flex justify-center gap-2 mt-2">
                 <a href="<%= edit_stop_path(stop) %>" data-turbo-method="get" class="btn btn-primary btn-outline flex-1">🔄 Riproponi</a>
                 <a href="<%= stop_path(stop) %>" data-turbo-method="delete" class="btn btn-error btn-outline flex-1">🗑️ Elimina</a>
@@ -127,8 +127,8 @@
   <% end %>
 </div>
 
-<% if true %>
+<% if user_signed_in? %>
   <footer>
-    <a href="" class="text-center text-sm w-full block">Esci</a>
+    <%= button_to "Esci", destroy_user_session_path, method: :delete, class: "text-center text-sm w-full block cursor-pointer" %>
   </footer>
 <% end %>
